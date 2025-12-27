@@ -112,7 +112,7 @@ runOAuthSimple oat cr = runOAuth oat cr O.defaultServer tl where
                                O.OutOfBand
 
 upgradeCred :: (Cred.ResourceToken ty', Monad m) => O.Token ty' -> OAuthT ty m (O.Cred ty')
-upgradeCred tok = liftM (Cred.upgradeCred tok . cred) ask
+upgradeCred tok = fmap (Cred.upgradeCred tok . cred) ask
 
 -- | Given a 'Cred.ResourceToken' of some kind, run an inner 'OAuthT' session
 -- with the same configuration but new credentials.
